@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c89c6145-564f-4a98-9c05-0f3ca48889e7" name="Default Changelist" comment="" />
+    <list default="true" id="c89c6145-564f-4a98-9c05-0f3ca48889e7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sections/category-head.liquid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sections/different-clinical.liquid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sections/home-collection.liquid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sections/product-tabs.liquid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sections/why-we-are.liquid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/page.our-difference.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/theme.scss.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/assets/theme.scss.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/timber.scss.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/assets/timber.scss.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout/theme.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/layout/theme.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/collection-template.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/collection-template.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/featured-collections.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/featured-collections.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/featured-content.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/featured-content.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/featured-product.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/featured-product.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/footer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/footer.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/header.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/header.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/newsletter.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/newsletter.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/product-template.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/product-template.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/slideshow.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/slideshow.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snippets/product-grid-item.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/snippets/product-grid-item.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/collection.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/templates/collection.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product.liquid" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +53,11 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1iBGlKTwmtQk40KkTD3xe72aCv0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -18,9 +65,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/img" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -31,21 +87,85 @@
       <option name="presentableId" value="Default" />
       <updated>1601373720956</updated>
       <workItem from="1601373722083" duration="5788000" />
-      <workItem from="1601466975292" duration="1319000" />
+      <workItem from="1601466975292" duration="7213000" />
+      <workItem from="1601538617857" duration="16560000" />
+      <workItem from="1601627862521" duration="16719000" />
+      <workItem from="1601717442874" duration="805000" />
+      <workItem from="1601881399365" duration="13665000" />
+      <workItem from="1602848669029" duration="1072000" />
     </task>
+    <task id="LOCAL-00001" summary="init project">
+      <created>1601469628804</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601469628805</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="git init" />
+    <MESSAGE value="init project" />
+    <option name="LAST_COMMIT_MESSAGE" value="init project" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="418" y="1257" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601641442490">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="418" y="1257" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601641442490" />
+    <state x="676" y="1401" width="557" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601538756019">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="676" y="1401" width="557" height="403" key="#com.intellij.fileTypes.FileTypeChooser/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601538756019" />
+    <state x="499" y="1147" width="912" height="911" key="CommitChangelistDialog2" timestamp="1601469628601">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="499" y="1147" width="912" height="911" key="CommitChangelistDialog2/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601469628601" />
     <state x="449" y="175" width="1022" height="737" key="SettingsEditor" timestamp="1601374072655">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="449" y="175" width="1022" height="737" key="SettingsEditor/0.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1601374072655" />
-    <state x="651" y="1338" width="618" height="522" key="find.popup" timestamp="1601382868466">
+    <state x="555" y="1335" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601469941135">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state x="651" y="1338" width="618" height="522" key="find.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601382868466" />
+    <state x="555" y="1335" width="800" height="535" key="Vcs.Push.Dialog.v2/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601469941135" />
+    <state x="570" y="1213" width="770" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601628380967">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="570" y="1213" width="770" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601628380967" />
+    <state x="741" y="1514" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601635994166">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="741" y="1514" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601635994166" />
+    <state x="673" y="1213" width="618" height="820" key="find.popup" timestamp="1601902237421">
+      <screen x="0" y="0" width="1920" height="2092" />
+    </state>
+    <state x="673" y="1213" width="618" height="820" key="find.popup/0.0.1920.2092@0.0.1920.2092" timestamp="1601902237421" />
+    <state x="808" y="1348" width="618" height="558" key="find.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601648180374" />
+    <state x="624" y="775" key="run.anything.popup" timestamp="1601562460196">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="624" y="775" key="run.anything.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601562460196" />
+    <state x="623" y="1322" width="672" height="678" key="search.everywhere.popup" timestamp="1601646279774">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="623" y="1322" width="672" height="678" key="search.everywhere.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1601646279774" />
   </component>
 </project>

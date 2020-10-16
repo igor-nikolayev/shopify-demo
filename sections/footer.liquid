@@ -1,279 +1,79 @@
-<footer class="site-footer small--text-center" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer-section">
-  <div class="wrapper">
+<div class="banner-block banner-subsribe">
+  <div class="container">
 
-    <div class="grid-uniform">
-
-      {% comment %}
-        Default to 1 footer column (copyright/powered_by/payment_types)
-      {% endcomment %}
-      {% assign num_footer_columns = 1 %}
-
-      {% comment %}
-        Create an extra menu column if link list has more than 5 links
-      {% endcomment %}
-      {% if linklists[section.settings.footer_link_list].links.size > 0 %}
-        {% comment %}
-          We have a Footer menu that isn't empty, we will need another column
-        {% endcomment %}
-        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
-        {% assign extra_footer_linklist_column = false %}
-        {% assign footer_linklist_count = linklists[section.settings.footer_link_list].links.size %}
-        {% if footer_linklist_count > 5 %}
-          {% assign extra_footer_linklist_column = true %}
-          {% comment %}
-            We split the links so we'll need another column
-          {% endcomment %}
-          {% assign num_footer_columns = num_footer_columns | plus: 1 %}
-        {% endif %}
-        {% comment %}
-          If we have an odd amount of links, we need to show 1 more link in 1st column
-        {% endcomment %}
-        {% assign extra_link = footer_linklist_count | modulo: 2 %}
-        {% comment %}
-          We start with a 2nd column after first column is filled up.
-        {% endcomment %}
-        {% assign footer_linklist_split = footer_linklist_count | divided_by: 2 | plus: extra_link | plus: 1 %}
-      {% endif %}
-
-      {% comment %}
-        Determine whether there are social links
-      {% endcomment %}
-      {% assign footer_social_enable = false %}
-      {% if
-        settings.social_twitter_link != blank
-        or settings.social_facebook_link != blank
-        or settings.social_pinterest_link != blank
-        or settings.social_google_plus_link != blank
-        or settings.social_instagram_link != blank
-        or settings.social_tumblr_link != blank
-        or settings.social_youtube_link != blank
-        or settings.social_vimeo_link != blank
-        or settings.social_fancy_link != blank
-        or settings.social_snapchat_link != blank
-      %}
-        {% assign footer_social_enable = true %}
-      {% endif %}
-
-      {% comment %}
-        Determine whether to show selectors
-      {% endcomment %}
-      {%- assign currency_selector = false -%}
-      {%- if section.settings.show_currency_selector and shop.enabled_currencies.size > 1 -%}
-        {%- assign currency_selector = true -%}
-      {%- endif -%}
-
-      {%- assign locale_selector = false -%}
-      {%- if section.settings.show_locale_selector and shop.enabled_locales.size > 1 -%}
-        {%- assign locale_selector = true -%}
-      {%- endif -%}
-
-      {% comment %}
-        Calculate the number of footer columns shown. Default to 1.
-      {% endcomment %}
-      {% if footer_social_enable %}
-        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
-      {% endif %}
-
-      {% case num_footer_columns %}
-        {% when 0 %}
-        {% when 1 %}
-          {% assign footer_column_width = '' %}
-        {% when 2 %}
-          {% assign footer_column_width = 'one-half small--one-whole' %}
-        {% when 3 %}
-          {% assign footer_column_width = 'one-third small--one-whole' %}
-        {% when 4 %}
-          {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
-      {% endcase %}
-
-      {% if linklists[section.settings.footer_link_list].links.size > 0 %}
-        <div class="grid__item {{ footer_column_width }}">
-          <ul class="no-bullets site-footer__linklist">
-            {% for link in linklists[section.settings.footer_link_list].links %}
-
-      {% comment %}
-        Create a second column
-      {% endcomment %}
-      {% if extra_footer_linklist_column and forloop.index == footer_linklist_split %}
-          </ul>
+    <form class="form form-subscribe" action="/subscribe.php" method="post">
+      <fieldset class="form-fieldset">
+        <input type="hidden" name="action" value="subscribe">
+        <input type="hidden" name="nl_first_name" value="bc">
+        <input type="hidden" name="check" value="1">
+        <div class="form-field">
+          <label class="form-label" for="nl_email">
+            Sign up for our emails!
+          </label>
+          <div class="form-prefixPostfix wrap subscribe-email-field">
+            <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="Email" class="input-group-field newsletter__input form-input" autocorrect="off" autocapitalize="off">
+            <input class="button button--primary form-prefixPostfix-button--postfix btn btn--small event_profile_email_signup" type="submit" value="JOIN" id="Subscribe">
+          </div>
         </div>
-        <div class="grid__item {{ footer_column_width }}">
-          <ul class="no-bullets site-footer__linklist">
-      {% endif %}
-
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-
-      {% if footer_social_enable %}
-        <div class="grid__item {{ footer_column_width }}">
-            <ul class="no-bullets social-icons">
-              {% if settings.social_facebook_link != blank %}
-                <li>
-                  <a href="{{ settings.social_facebook_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
-                    <span class="icon icon-facebook" aria-hidden="true"></span>
-                    Facebook
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_twitter_link != blank %}
-                <li>
-                  <a href="{{ settings.social_twitter_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
-                    <span class="icon icon-twitter" aria-hidden="true"></span>
-                    Twitter
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_pinterest_link != blank %}
-                <li>
-                  <a href="{{ settings.social_pinterest_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
-                    <span class="icon icon-pinterest" aria-hidden="true"></span>
-                    Pinterest
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_instagram_link != blank %}
-                <li>
-                  <a href="{{ settings.social_instagram_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
-                    <span class="icon icon-instagram" aria-hidden="true"></span>
-                    Instagram
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_snapchat_link != blank %}
-                <li>
-                  <a href="{{ settings.social_snapchat_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}">
-                    <span class="icon icon-snapchat" aria-hidden="true"></span>
-                    Snapchat
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_google_plus_link != blank %}
-                <li>
-                  <a href="{{ settings.social_google_plus_link | escape }}" rel="publisher" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}">
-                    <span class="icon icon-google_plus" aria-hidden="true"></span>
-                    Google Plus
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_tumblr_link != blank %}
-                <li>
-                  <a href="{{ settings.social_tumblr_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
-                    <span class="icon icon-tumblr" aria-hidden="true"></span>
-                    Tumblr
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_youtube_link != blank %}
-                <li>
-                  <a href="{{ settings.social_youtube_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
-                    <span class="icon icon-youtube" aria-hidden="true"></span>
-                    YouTube
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_vimeo_link != blank %}
-                <li>
-                  <a href="{{ settings.social_vimeo_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
-                    <span class="icon icon-vimeo" aria-hidden="true"></span>
-                    Vimeo
-                  </a>
-                </li>
-              {% endif %}
-              {% if settings.social_fancy_link != blank %}
-                <li>
-                  <a href="{{ settings.social_fancy_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
-                    <span class="icon icon-fancy" aria-hidden="true"></span>
-                    Fancy
-                  </a>
-                </li>
-              {% endif %}
-            </ul>
-        </div>
-      {% endif %}
-
-      {%- liquid
-        assign selectors_form_class = "selectors-form"
-
-        if num_footer_columns == 1
-          assign selectors_form_class = "selectors-form selectors-form--single-column"
-        endif
-      -%}
-
-      <div class="grid__item {{ footer_column_width }} {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
-        {%- form 'localization', class: selectors_form_class -%}
-          {%- if locale_selector -%}
-            <div class="selectors-form__item">
-              <h2 class="visually-hidden" id="lang-heading">
-                {{ 'general.language.dropdown_label' | t }}
-              </h2>
-
-              <div class="disclosure" data-disclosure-locale>
-                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
-                  {{ form.current_locale.endonym_name }}
-                </button>
-                <ul id="lang-list" class="disclosure-list" data-disclosure-list>
-                  {%- for locale in form.available_locales -%}
-                    <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
-                      <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
-                        {{ locale.endonym_name }}
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
-              </div>
-            </div>
-          {%- endif -%}
-
-          {%- if currency_selector -%}
-            <div class="selectors-form__item">
-              <h2 class="visually-hidden" id="currency-heading">
-                {{ 'general.currency.dropdown_label' | t }}
-              </h2>
-
-              <div class="disclosure" data-disclosure-currency>
-                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list" aria-describedby="currency-heading" data-disclosure-toggle>
-                  {{ form.current_currency.iso_code }} {%- if form.current_currency.symbol -%}{{ form.current_currency.symbol }}{%- endif -%}
-                </button>
-                <ul id="currency-list" class="disclosure-list" data-disclosure-list>
-                  {%- for currency in form.available_currencies -%}
-                    <li class="disclosure-list__item {% if currency.iso_code == form.current_currency.iso_code %}disclosure-list__item--current{% endif %}">
-                      <a class="disclosure-list__option" href="#" {% if currency.iso_code == form.current_currency.iso_code %}aria-current="true"{% endif %} data-value="{{ currency.iso_code }}" data-disclosure-option>
-                        {{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%}
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                <input type="hidden" name="currency_code" id="CurrencySelector" value="{{ form.current_currency.iso_code }}" data-disclosure-input/>
-              </div>
-            </div>
-          {%- endif -%}
-        {%- endform -%}
-
-        <p class="site-footer__copyright-content">&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}<br>{{ powered_by_link }}</p>
-
-        {%- if section.settings.show_payment_icons -%}
-          {%- unless shop.enabled_payment_types == empty -%}
-            <span class="visually-hidden">{{ 'general.payment.method' | t }}</span>
-            <ul class="inline-list payment-icons site-footer__payment-icons">
-              {%- for type in shop.enabled_payment_types -%}
-                <li>
-                  {{ type | payment_type_svg_tag: class: 'icon' }}
-                </li>
-              {%- endfor -%}
-            </ul>
-          {%- endunless -%}
-        {%- endif -%}
+      </fieldset>
+    </form>
+  </div>
+</div>
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <section class="footer__content">
+      <div class="footer-logo footer-logo--center">
+        <a href="#" class="event_menu_click" data-action-detail="footer : home">
+          <img src="//cdn.shopify.com/s/files/1/0497/3733/4939/t/4/assets/logo.svg?v=6081629309748966955" alt="elogic logo" class="w100">
+        </a>
       </div>
+      <p>
+        CONNECT WITH US
+      </p>
+      <ul class="footer-socials">
+        <li>
+          <a href="#" class="event_socialmedia_exit" data-action-detail="twitter" aria-label="Twitter" target="_blank" rel="noopener">
+            <img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/twitter-logo.png" alt="Twitter Logo">
+          </a>
+        </li>
+        <li>
+          <a href="#" class="event_socialmedia_exit" data-action-detail="facebook" aria-label="Facebook" target="_blank" rel="noopener">
+            <img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/fb-logo.png" alt="Facebook Logo">
+          </a>
+        </li>
+        <li>
+          <a href="#" class="event_socialmedia_exit" data-action-detail="instagram" aria-label="Instagram" target="_blank" rel="noopener">
+            <img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/ig-logo.png" alt="Instagram Logo">
+          </a>
+        </li>
+        <li>
+          <a href="#" class="event_socialmedia_exit" data-action-detail="youtube" aria-label="YouTube" target="_blank" rel="noopener">
+            <img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/youtube-logo.png" alt="Youtube Logo">
+          </a>
+        </li>
+      </ul>
+      <ul class="footer-menu">
+        <li><a href="#">Contact Us</a></li>
+        <li>
+          <a href="#" class="event_menu_click" data-action-detail="footer : faq">FAQ</a>
+        </li>
+        <li><a href="#" class="event_internal_link" data-action-detail="Do not sell my personal information">Do not sell my personal information</a></li>
+        <li><a href="#" class="event_outbound_link" data-action-detail="Terms &amp; Conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a></li>
+        <li><a href="#" class="event_outbound_link" data-action-detail="Privacy" target="_blank" rel="noopener">Privacy</a></li>
+        <li><a class="event_outbound_link" title="Privacy Notice" data-action-detail="https://www.pg.com/privacy/english/privacy_statement.shtml#CCPA" href="#" target="_blank">CA Privacy</a></li>
+      </ul>
+      <a href="" class="btn-choises event_outbound_link" data-action-detail="AdChoices" target="_blank" rel="noopener">
+        <div class="image">
+          <img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/stencil/97951950-e574-0138-68f6-0242ac110007/e/9a4cd950-b892-0138-b26b-0242ac110008/img/icons/Secret_AdChoices_logo_footer_optimized.png" alt="AdChoise button">
+        </div>
+        <span>AdChoices</span>
+      </a>
+    </section>
+    <div class="footer-copyright">
+      <p class="powered-by">© 2020 Elogic </p>
     </div>
-
   </div>
 </footer>
-
 
 
 {% schema %}

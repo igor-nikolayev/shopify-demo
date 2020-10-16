@@ -1,20 +1,35 @@
 <div data-section-id="{{ section.id }}" data-section-type="featured-content-section">
-  <div class="rich-text wrapper">
-    <div class="grid">
-      <div class="grid__item text-center{% unless section.settings.home_page_full_width %} large--two-thirds medium--two-thirds push--large--one-sixth push--medium--one-sixth{% endunless %}">
-        {% if section.settings.section_title != blank %}
-          <div class="section-header">
-            <h2 class="rich-text__heading--{{ section.settings.text_size }} section-header__title h1">{{ section.settings.section_title | escape }}</h2>
-          </div>
-        {% endif %}
-        {% if section.settings.text != blank %}
-          <div class="rte rich-text__text--{{ section.settings.text_size }}">
-            {{ section.settings.text }}
-          </div>
-        {% endif %}
+  <section class="claims" id="main" tabindex="-1">
+    <div class="container">
+      <h2>
+        Fight 3 types of sweat with 3x more protection*
+      </h2>
+      <div class="steps">
+        <div class="item">
+          <div class="image"><img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/stress-icon.png" alt="Response being held against black background"></div>
+          <div class="title">Stress</div>
+        </div>
+        <div class="item">
+          <div class="image"><img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/heat-icon.png" alt="Odor Sheild being held against black background"></div>
+          <div class="title">Heat</div>
+        </div>
+        <div class="item">
+          <div class="image"><img src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/product_images/uploaded_images/motion-icon.png" alt="Sensitive skin being held against black background"></div>
+          <div class="title">Activity</div>
+        </div>
+      </div>
+      <div class="claims__info">
+        <p>
+          Whether you're experiencing sweat caused by stress, heat or activity, we have a clinical strength antiperspirant made just for you.
+        </p>
+      </div>
+      <div class="claims__subinfo">
+        <p>
+          *versus the wetness protection required of an ordinary antiperspirant
+        </p>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 
 

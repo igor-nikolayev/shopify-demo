@@ -42,7 +42,7 @@
 {%- assign featured_image = product.featured_media.preview_image %}
 {%- assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-<div class="grid__item grid-product {{ grid_item_width }}{% if sold_out %} is-sold-out{% endif %}">
+<div class="grid__item grid-product">
   <div class="grid-product__wrapper">
     <div class="grid-product__image-wrapper">
       <a class="grid-product__image-link{% unless featured_image.src == blank %} grid-product__image-link--loading{% endunless %}" href="{{ product.url | within: collection }}" data-image-link>
@@ -80,8 +80,8 @@
 
     <a href="{{ product.url | within: collection }}" class="grid-product__meta">
       <span class="grid-product__title">{{ product.title }}</span>
+        <p class="">{{ product.description }}</p>
       <span class="grid-product__price-wrap">
-        <span class="long-dash">—</span>
         <span class="grid-product__price">
           {% if on_sale %}
             <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
@@ -98,29 +98,7 @@
             {{ product.price | money_without_trailing_zeros }}
           {% endif %}
         </span>
-
-        {%- if product.price_varies == false and variant.unit_price_measurement -%}
-          {%- capture unit_price_separator -%}
-            <span aria-hidden="true">/</span><span class="visually-hidden">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
-          {%- endcapture -%}
-
-          {%- capture unit_price_base_unit -%}
-            <span>
-              {%- if variant.unit_price_measurement.reference_value != 1 -%}
-                {{- variant.unit_price_measurement.reference_value -}}
-              {%- endif -%}
-              {{ variant.unit_price_measurement.reference_unit }}
-            </span>
-          {%- endcapture -%}
-          <span class="product-unit-price">
-            <span class="visually-hidden">{{ 'products.general.unit_price' | t }}</span>
-            <span>{{ variant.unit_price | money }}</span>{{- unit_price_separator -}}{{- unit_price_base_unit -}}
-          </span>
-        {%- endif -%}
       </span>
-      {% if section.settings.product_vendor_enable %}
-        <p class="grid-product__vendor">{{ product.vendor }}</p>
-      {% endif %}
     </a>
   </div>
 </div>

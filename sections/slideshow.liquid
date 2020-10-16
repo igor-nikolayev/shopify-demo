@@ -1,199 +1,25 @@
-{%- if section.settings.home_hero_height == 'adapt' -%}
-  {% comment %}
-    'min_aspect_ratio' is the minimum aspect ratio of images shown without
-    whitespace when 'home_hero_height' is set to 'adapt'.
-    The aspect ratio values for the first image in the slideshow will be used
-    unless it is blank, in that case a ratio of 2:1 will be used.
-  {% endcomment %}
-
-  {%- assign first_block = section.blocks[0] -%}
-  {%- if first_block.settings.image.aspect_ratio == blank -%}
-    {%- assign min_aspect_ratio = 2.0 -%}
-  {%- else -%}
-    {%- assign min_aspect_ratio = first_block.settings.image.aspect_ratio -%}
-  {%- endif -%}
-  {%- assign wrapper_height = 100 | divided_by: min_aspect_ratio -%}
-
-  {% comment %}
-    Change the hero slideshow's dots color based on the slides' text color.
-  {% endcomment %}
-  {%- style -%}
-    .hero-{{ section.id }} {
-      height: {{- wrapper_height -}}vw !important;
-      overflow: hidden;
-    }
-    .hero-{{ section.id }} .slick-track,
-    .hero-{{ section.id }} .slideshow__overlay:before {
-      height: {{- wrapper_height -}}vw;
-    }
-  {%- endstyle -%}
-{%- endif -%}
-
-<div id="HeroWrapper-{{ section.id }}"{% if section.settings.home_hero_height == 'adapt' %} class="hero--adapt"{% endif %} data-section-id="{{ section.id }}" data-section-type="slideshow-section">
-  {%- if section.blocks.size > 0 -%}
-    <div class="hero-{{ section.id }} hero"
-         id="Hero-{{ section.id }}"
-         aria-label="slideshow"
-         aria-describedby="a11y-slideshow-info"
-         tabindex="-1"
-         role="region"
-         data-autoplay="{{ section.settings.hero_home_auto }}"
-         data-autoplayspeed="{{ section.settings.home_hero_auto_speed | times: 1000 }}"
-         data-adapt="{% if section.settings.home_hero_height == 'adapt' %}true{% else %}false{% endif %}"
-         data-slide-nav-a11y="{{ 'home_page.slideshow.load_slide' | t: slide_number: '[slide_number]' }}"
-         data-slide-nav-active-a11y="{{ 'home_page.slideshow.active_slide' | t: slide_number: '[slide_number]' }}"
-         data-slide-index="0">
-      {%- for block in section.blocks -%}
-        {%- style -%}
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .hero__pause,
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .hero__pause .icon:before,
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .slick-prev .icon:before,
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .slick-next .icon:before,
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .slide--{{ block.id }} {
-            color: {{ block.settings.slide_text_color }};
-          }
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .slick-dots li a:before {
-            background: transparent;
-            border-color: {{ block.settings.slide_text_color }};
-          }
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} li.slick-active a:before {
-            background: {{ block.settings.slide_text_color }};
-            border-color: transparent;
-          }
-          #HeroWrapper-{{ section.id }} .hero--color-{{ forloop.index0 }} .hero__pause .icon {
-            fill: {{ block.settings.slide_text_color }};
-          }
-          #HeroWrapper-{{ section.id }} .slide--{{ block.id }} .hero__text-wrap {
-            text-align: {{ block.settings.text_alignment }}
-          }
-        {%- endstyle -%}
-        {%- comment -%}
-          Apply a color overlay on a per-slide basis. The overlay is defined by
-          a linear gradient with 4 points along it. The last 3 points cause the
-          bottom of the overlay to be more opaque, in order to increase contrast
-          with the controls for a11y purposes. Remove the 'background-image'
-          style below and change to the following to remove the gradient:
-
-          background-color: {{ block.settings.image_overlay }};
-          opacity: {{ block.settings.image_overlay_opacity | divided_by: 100.00 }};
-
-        {%- endcomment -%}
-        {%- if block.settings.image_overlay -%}
-          {%- style -%}
-            .slide--{{ block.id }} .slideshow__overlay:before {
-              {%- assign opacity_alpha = block.settings.image_overlay_opacity | divided_by: 100.00 -%}
-              {%- assign opacity_alpha_3 = opacity_alpha | plus: 0.25 | at_most: 1.0 -%}
-              {%- assign opacity_alpha_2 = opacity_alpha_3 | minus: opacity_alpha | divided_by: 2.0 | plus: opacity_alpha -%}
-              background-image: linear-gradient(to bottom,
-                                                {{ '#000' | color_modify: 'alpha', opacity_alpha }},
-                                                {{ '#000' | color_modify: 'alpha', opacity_alpha }} calc(100% - 150px),
-                                                {{ '#000' | color_modify: 'alpha', opacity_alpha_2 }} calc(100% - 60px),
-                                                {{ '#000' | color_modify: 'alpha', opacity_alpha_3 }});
-            }
-          {%- endstyle -%}
-        {%- endif -%}
-        <div class="hero__slide slide--{{ block.id }}{% if block.settings.image == blank %} slide--placeholder{% endif %}"
-              data-hero-slide
-              {{ block.shopify_attributes }}>
-          {%- if block.settings.image == blank -%}
-            <div class="placeholder-background">
-              {%- capture current -%}{% cycle 1, 2 %}{%- endcapture -%}
-              {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-            </div>
-          {%- else -%}
-            <noscript>
-              {%- if forloop.first == true -%}
-                <div class="hero__image-no-js"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '2048x' }}');"{% endif %}></div>
-              {%- endif -%}
-            </noscript>
-            {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-            <img class="hero__image hero__image--{{ block.id }} lazyload fade-in{% unless forloop.first == true %} lazypreload{% endunless %}"
-              {%- if forloop.first == true -%}
-                src="{{ block.settings.image | img_url: '300x' }}"
-              {%- endif -%}
-              data-src="{{ img_url }}"
-              data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-              data-aspectratio="{{ block.settings.image.aspect_ratio }}"
-              data-sizes="auto"
-              data-parent-fit="cover"
-              data-hero-image
-              alt="{{ block.settings.image.alt | escape }}"
-              style="object-position: {{ block.settings.image_position }}">
-          {%- endif -%}
-
-          <div class="hero__text-wrap{% if block.settings.image_overlay %} slideshow__overlay{% endif %}">
-            <div class="hero__text-align wrapper">
-              <div class="hero__text-content" data-hero-text-content>
-                {%- unless block.settings.slide_subheading == blank -%}
-                  <p class="hero__subtitle">
-                    {{ block.settings.slide_subheading | escape }}
-                  </p>
-                {%- endunless -%}
-                {%- unless block.settings.slide_heading == blank -%}
-                  <h2 class="hero__title h1">
-                    {{ block.settings.slide_heading | escape }}
-                  </h2>
-                {%- endunless -%}
-                {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
-                  <a href="{{ block.settings.button_link }}" style="color: {{ block.settings.slide_button_label_color }}; background-color: {{ block.settings.slide_button_background_color }}" class="btn hero__cta">
-                    {{ block.settings.button_label | escape }}
-                  </a>
-                {%- endif -%}
-              </div>
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
-
-      {%- if section.blocks.size > 1 -%}
-        <div class="hero__controls wrapper">
-          {%- if section.settings.hero_home_auto -%}
-            <button class="hero__pause" aria-live="polite" aria-label="{{ 'home_page.slideshow.pause' | t }}" data-label-pause="{{ 'home_page.slideshow.pause' | t }}" data-label-play="{{ 'home_page.slideshow.play' | t }}" data-pause>
-              <span class="icon icon-pause" aria-hidden="true"></span>
-              <span class="icon icon-play" aria-hidden="true"></span>
-            </button>
-          {%- endif -%}
-          <ul>
-            <li>
-              <button class="slick-prev" aria-label="{{ 'home_page.slideshow.previous_slide' | t }}" data-slide-previous>
-                <span class="icon icon-slide-prev" aria-hidden="true"></span>
-              </button>
-            </li>
-            <li>
-              <button class="slick-next" aria-label="{{ 'home_page.slideshow.next_slide' | t }}" data-slide-next>
-                <span class="icon icon-slide-next" aria-hidden="true"></span>
-              </button>
-            </li>
-          </ul>
-          <div class="hero__dots-wrapper" data-hero-dots-wrapper></div>
-        </div>
-      {%- endif -%}
-    </div>
-    {%- if section.settings.home_hero_height == 'adapt' -%}
-      <div class="hero__adapt-text-wrap wrapper" data-hero-adapt-text-wrap>
-        {%- for block in section.blocks -%}
-          <div class="hero__text-content hero__text-content--adapt text-center" data-index="{{ forloop.index0 }}" data-hero-text-content>
-            {%- unless block.settings.slide_subheading == blank -%}
-              <p class="hero__subtitle">
-                {{ block.settings.slide_subheading | escape }}
-              </p>
-            {%- endunless -%}
-            {%- unless block.settings.slide_heading == blank -%}
-              <h2 class="hero__title h1">
-                {{ block.settings.slide_heading | escape }}
-              </h2>
-            {%- endunless -%}
-            {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
-              <a href="{{ block.settings.button_link }}" class="hero__cta btn">
-                {{ block.settings.button_label | escape }}
-              </a>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-  {%- endif -%}
-</div>
+<section class="homepage-hero">
+  <div class="homepage-hero__video isDesktopOnly">
+    <video class=" lazyloaded" autoplay="" muted="" loop="true" preload="auto">
+      <source src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/stencil/da618ce0-e689-0138-dcb6-0242ac11000f/e/9a4cd950-b892-0138-b26b-0242ac110008/img/video/sample.webm" type="video/webm">
+      <source src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/stencil/da618ce0-e689-0138-dcb6-0242ac11000f/e/9a4cd950-b892-0138-b26b-0242ac110008/img/video/sample.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="homepage-hero__video isMobileOnly">
+    <video class=" lazyloaded" autoplay="" muted="" loop="true" preload="auto">
+      <source src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/stencil/da618ce0-e689-0138-dcb6-0242ac11000f/e/9a4cd950-b892-0138-b26b-0242ac110008/img/video/sample-mobile.webm" type="video/webm">
+      <source src="https://cdn11.bigcommerce.com/s-rq4scv6wd6/stencil/da618ce0-e689-0138-dcb6-0242ac11000f/e/9a4cd950-b892-0138-b26b-0242ac110008/img/video/sample-mobile.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="homepage-hero__content container">
+    <h2>
+      Nothing fights sweat better
+    </h2>
+    <a href="/collections/all" class="btn btn--large event_buy_now" data-action-detail="nothing fights sweat better">
+      LEARN MORE
+    </a>
+  </div>
+</section>
 
 {% schema %}
 {

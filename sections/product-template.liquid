@@ -20,6 +20,7 @@
     {%- assign first_media = true -%}
 
     <div class="grid product-single">
+    <div class="grid product-single">
       <div class="grid__item large--seven-twelfths medium--seven-twelfths text-center">
         <div id="ProductMediaGroup-{{ section.id }}" class="product-single__media-group-wrapper" data-product-single-media-group-wrapper>
           <div class="product-single__media-group{% unless stacked %} product-single__media-group--single-xr{% endunless %}" data-product-single-media-group>
@@ -147,7 +148,6 @@
               </div>
             {%- endif -%}
 
-            <hr class="hr--small">
 
             <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
             <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">

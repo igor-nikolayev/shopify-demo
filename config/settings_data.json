@@ -78,18 +78,19 @@
         "type": "featured-product",
         "settings": {}
       },
-      "newsletter": {
-        "type": "newsletter",
-        "settings": {}
+      "why-we-are": {
+        "type": "why-we-are",
+        "settings": {
+          "section_title": ""
+        }
       }
     },
     "content_for_index": [
       "slideshow",
       "featured-content",
       "featured-collections",
-      "featured-products",
-      "featured-product",
-      "newsletter"
+      "why-we-are",
+      "featured-product"
     ]
   },
   "presets": {
@@ -171,19 +172,13 @@
         "featured-product": {
           "type": "featured-product",
           "settings": {}
-        },
-        "newsletter": {
-          "type": "newsletter",
-          "settings": {}
         }
       },
       "content_for_index": [
         "slideshow",
         "featured-content",
         "featured-collections",
-        "featured-products",
-        "featured-product",
-        "newsletter"
+        "featured-product"
       ]
     },
     "Playful": {
@@ -279,10 +274,6 @@
             "collection_products_grid": "collage"
           }
         },
-        "newsletter": {
-          "type": "newsletter",
-          "settings": {}
-        },
         "header": {
           "type": "header",
           "settings": {
@@ -368,7 +359,6 @@
         "slideshow",
         "1496177901425",
         "featured-products",
-        "newsletter",
         "1496078102297",
         "1494860348200",
         "1494894035034"

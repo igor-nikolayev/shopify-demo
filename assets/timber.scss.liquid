@@ -536,15 +536,14 @@ body {
 
   // to be kept before Sections Everywhere
   body:not(.template-index) & {
-    padding-top: $gutter;
+    padding-top: 10px;
 
     @include at-query($min, $large) {
-      padding-top: $contentTopMargin;
+      padding-top: 30px;
     }
   }
 
   @include at-query($min, $postSmall) {
-    padding-bottom: 40px;
   }
 }
 
@@ -593,9 +592,7 @@ h6 {
 
   // Headings in the hero/slideshow use the color set in
   // the Slideshow section settings, not $colorHeadings
-  &:not(.hero__title) {
-    color: $colorHeadings;
-  }
+
 
   a {
     text-decoration: none;
@@ -2557,7 +2554,7 @@ $socialIconFontStack: 'icons';
   }
 
   .icon {
-    font-size: em(30px);
+    font-size: em(60px);
   }
 }
 
@@ -2749,7 +2746,7 @@ $socialIconFontStack: 'icons';
 /*================ Cart bubble for items in cart ================*/
 @include at-query($min, $large) {
   .site-nav__link--icon .icon {
-    font-size: em(22px);
+    font-size: em(60px);
   }
 }
 
@@ -3454,11 +3451,20 @@ $socialIconFontStack: 'icons';
     }
   }
 }
+.w100{
+  width: 100%;
+}
 
 .product-unit-price {
   color: $colorTextBody;
   display: block;
 }
-
-body{
+.icon-search-header {
+  color: #009ed8;
+  font-size: 28px !important;
+  height: 34px !important;
+  width: 32px !important;
+}
+.grid__item{
+  margin-top: 30px;
 }
