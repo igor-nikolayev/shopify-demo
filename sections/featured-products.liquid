@@ -1,13 +1,6 @@
 <div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template" data-grid-type="{{ section.settings.collection_products_grid }}">
   <div class="wrapper">
-    {% if section.settings.title != blank %}
-      <div class="section-header text-center">
-        <h2 class="h1 section-header__title">{{ section.settings.title | escape }}</h2>
-        <hr class="hr--small">
-      </div>
-    {% endif %}
 
-    <div class="{% if section.settings.collection_products_grid == 'collage' %}grid grid-collage{% else %}grid-uniform{% endif %}">
 
       {% comment %}
         Loop through products in your Frontpage collection.
@@ -41,22 +34,28 @@
           {% endif %}
           {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
 
-          {% for product in collections[section.settings.home_featured_products].products %}
-            {% include 'product-grid-collage' %}
-          {% endfor %}
+          <div class="homepage-products">
+            <div class="list-items">
+              {% for product in collections[section.settings.home_featured_products].products %}
+
+                  {% include 'product-grid-item-home' %}
+              {% endfor %}
+            </div>
+          </div>
 
         {% else %}
 
           {% assign grid_item_width = 'medium--one-half large--one-third' %}
           {% for product in collections[section.settings.home_featured_products].products %}
-            {% include 'product-grid-item' %}
+            <div class="homepage-products">
+              {% include 'product-grid-item-home' %}
+            </div>
           {% endfor %}
 
         {% endif %}
 
       {% endif %}
     </div>
-  </div>
 </div>
 
 

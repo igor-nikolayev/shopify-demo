@@ -45,27 +45,7 @@
 <div class="grid__item grid-product">
   <div class="grid-product__wrapper">
     <div class="grid-product__image-wrapper">
-      <a class="grid-product__image-link{% unless featured_image.src == blank %} grid-product__image-link--loading{% endunless %}" href="{{ product.url | within: collection }}" data-image-link>
-        {% if featured_image.src == blank %}
-          <img class="grid-product__image" src="{{ featured_image.src | img_url: '1024x' }}" alt="{{ featured_image.alt | escape }}">
-        {% else %}
-          {% include 'image-style' with image: featured_image, small_style: true, width: width, height: height, wrapper_id: img_wrapper_id, img_id_class: img_id_class %}
-          <div id="{{ img_wrapper_id }}" class="product--wrapper">
-            <div style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100 }}%;">
-              <img class="product--image lazyload {{ img_id_class }}"
-                   data-src="{{ img_url }}"
-                   data-widths="[180, 370, 590, 740, 900, 1080, 1296, 1512, 1728, 2048]"
-                   data-aspectratio="{{ featured_image.aspect_ratio }}"
-                   data-sizes="auto"
-                   alt="{{ featured_image.alt | escape }}"
-                   data-image>
-            </div>
-          </div>
-          <noscript>
-            <img class="grid-product__image" src="{{ featured_image.src | img_url: '1024x' }}" alt="{{ featured_image.alt | escape }}">
-          </noscript>
-        {% endif %}
-      </a>
+        <img class="grid-product__image" src="{{ featured_image.src | img_url: '1024x' }}" alt="{{ featured_image.alt | escape }}">
       {% if sold_out %}
         <div class="grid-product__sold-out">
           <p>{{ 'products.product.sold_out_html' | t }}</p>
@@ -78,27 +58,30 @@
       {% endif %}
     </div>
 
-    <a href="{{ product.url | within: collection }}" class="grid-product__meta">
+    <div href="{{ product.url | within: collection }}" class="grid-product__meta">
       <span class="grid-product__title">{{ product.title }}</span>
-        <p class="">{{ product.description }}</p>
-      <span class="grid-product__price-wrap">
+        <span class="grid-product__price-wrap">
         <span class="grid-product__price">
           {% if on_sale %}
-            <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+              <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
           {% else %}
-             <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+              <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
           {% endif %}
-          {% if product.price_varies %}
-            {{ product.price_min | money_without_trailing_zeros }}
-            <span class="icon-fallback-text">
+            {% if product.price_varies %}
+                {{ product.price_min | money_without_trailing_zeros }}
+                <span class="icon-fallback-text">
               <span class="icon icon-plus grid-product__price-min" aria-hidden="true"></span>
               <span class="fallback-text">+</span>
             </span>
-          {% else %}
-            {{ product.price | money_without_trailing_zeros }}
-          {% endif %}
+            {% else %}
+                {{ product.price | money_without_trailing_zeros }}
+            {% endif %}
         </span>
       </span>
-    </a>
+        <p class="">{{ product.description }}</p>
+        <a href="{{ product.url | within: collection }}" class="listItem-button">
+            Shop now
+        </a>
+    </div>
   </div>
 </div>

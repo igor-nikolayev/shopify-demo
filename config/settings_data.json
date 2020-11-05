@@ -83,14 +83,27 @@
         "settings": {
           "section_title": ""
         }
+      },
+      "reviews": {
+        "type": "reviews",
+        "settings": {
+          "section_title": ""
+        }
+      },
+      "home-page-conc": {
+        "type": "home-page-conc",
+        "settings": {
+          "section_title": ""
+        }
       }
     },
     "content_for_index": [
       "slideshow",
       "featured-content",
-      "featured-collections",
+      "featured-products",
       "why-we-are",
-      "featured-product"
+      "reviews",
+      "home-page-conc"
     ]
   },
   "presets": {

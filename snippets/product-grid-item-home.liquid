@@ -1,0 +1,61 @@
+<!-- /snippets/product-grid-item.liquid -->
+{% comment %}
+
+  This snippet is used to showcase each product during the loop,
+  'for product in collection.products' in collection.liquid.
+
+  A liquid variable (grid_item_width) is set just before the this
+  snippet is included to change the size of the container.
+  Once the variable is set on a page, all future instances of this
+  snippet will use that width. Overwrite the variable to adjust this.
+
+  Example
+    - assign grid_item_width = 'large--one-quarter medium--one-half'
+
+{% endcomment %}
+
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
+
+{% unless width %}
+  {%- assign width = 310 -%}
+{% endunless %}
+{% unless height %}
+  {%- assign height = 415 -%}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{% capture img_id_class %}ProductImage-{{ product.featured_media.id }}{% endcapture %}
+{% capture img_wrapper_id %}ProductImageWrapper-{{ product.featured_media.id }}{% endcapture %}
+{%- assign featured_image = product.featured_media.preview_image %}
+{%- assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+<div class="item">
+    <img class=" lazyload {{ img_id_class }}"
+         data-src="{{ img_url }}"
+         data-widths="[180, 370, 590, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-aspectratio="{{ featured_image.aspect_ratio }}"
+         data-sizes="auto"
+         alt="{{ featured_image.alt | escape }}"
+         data-image>
+
+    <h3 class="product-title ">{{ product.title }}</h3>
+    <div class="home-product__desc product-info">
+        <p class="product-info"> Lorem ipsum dolor sit amet.</p>
+    </div>
+    <a href="{{ product.url | within: collection }}" class="btn btn--large">
+        Shop now
+    </a>
+</div>

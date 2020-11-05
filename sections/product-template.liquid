@@ -137,17 +137,6 @@
             {% endcomment %}
             {% include 'product-price', variant: current_variant %}
 
-            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-              <div class="product-single__policies rte">
-                {%- if shop.taxes_included -%}
-                  {{ 'products.general.include_taxes' | t }}
-                {%- endif -%}
-                {%- if shop.shipping_policy.body != blank -%}
-                  {{ 'products.general.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-
 
             <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
             <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
@@ -216,26 +205,33 @@
                 {% endfor %}
               </select>
 
-              {% if section.settings.quantity_enabled %}
-              <div class="product-single__quantity">
-                <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
-                <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
-              </div>
-              {% endif %}
-
-              <div class="product-single__add-to-cart{% if section.settings.add_to_cart_button_size == 'large' %} product-single__add-to-cart--full-width{% endif %}">
-                <button type="submit" name="add" id="AddToCart--{{ section.id }}" class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
-                  <span class="btn__text">
-                    {% if current_variant.available %}
-                      {{ 'products.product.add_to_cart' | t }}
-                    {% else %}
-                      {{ 'products.product.sold_out' | t }}
-                    {% endif %}
-                  </span>
-                </button>
-                {% if section.settings.enable_payment_button %}
-                  {{ form | payment_button }}
-                {% endif %}
+              <div class="productView-options__buttons">
+                <div class="form-field form-field--increments">
+                  <div class="form-increment form-increment__pdp">
+                    <input class="form-input form-input--incrementTotal" type="tel" id="Quantity" name="quantity" value="1" min="1">
+                    <div class="form-increment__pdp__buttons">
+                      <button class="form-increment__pdp__button form-increment__pdp__button-plus" aria-label="plus" onclick="inc(event)">
+                      </button>
+                      <button class="form-increment__pdp__button form-increment__pdp__button-minus" aria-label="minus" onclick="dec(event)">
+                      </button>
+                    </div>
+                  </div>
+                  <script>
+                    function  dec(e){
+                      e.preventDefault();
+                      if(document.getElementById('Quantity').value>0){
+                        document.getElementById('Quantity').value--
+                      }
+                    }
+                    function inc(e){
+                      e.preventDefault();
+                      document.getElementById('Quantity').value++
+                    }
+                  </script>
+                </div>
+                <div class="form-action">
+                  <input type="submit" name="add" id="AddToCart--{{ section.id }}" class="pdp-button event_buy_now_add_to_cart" value="Add to Cart">
+                </div>
               </div>
             {% endform %}
 
